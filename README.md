@@ -1,2 +1,2 @@
 # Node-MySql
-Repository having various projects using node + mysql REST API 
+Repository having various projects using node + React + mysql + REST API 
