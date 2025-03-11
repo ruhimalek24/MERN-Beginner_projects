@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>City List</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: lightcyan;
+        }
+
+        h1 {
+            text-decoration: underline;
+        }
+
+        li,
+        input,
+        button {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>City List</h1>
+    <% if (error){ %>
+        <p>
+            <%= error %>
+        </p>
+        <%}%>
+            <ul>
+                <% cities.forEach(city=>{ %>
+                    <li>
+                        <%= city.name %>
+                    </li>
+                    <% }) %>
+            </ul>
+
+            <form action="/addCity" method="POST">
+                <input type="text" name="name" placeholder="Enter city name" required>
+                <button type="submit">Add City</button>
+            </form>
+</body>
+
+</html>

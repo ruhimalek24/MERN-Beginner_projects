@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Users List</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: lightcyan;
+        }
+
+        h1 {
+            text-decoration: underline;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid black;
+            font-size: 18px;
+            margin-left: 3%;
+        }
+
+        td {
+            padding: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Users List</h1>
+
+    <% if (error) { %>
+        <p style="color: red;">
+            <%= error %>
+        </p>
+        <% } %>
+
+
+            <table border="1">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Mobile</th>
+                    <th>Media URL</th>
+                    <th>Modify</th>
+                </tr>
+                <% users.forEach(user=> { %>
+                    <tr>
+                        <td>
+                            <%= user.id %>
+                        </td>
+                        <td>
+                            <%= user.name %>
+                        </td>
+                        <td>
+                            <%= user.city %>
+                        </td>
+                        <td>
+                            <%= user.mobile ? user.mobile : 'N/A' %>
+                        </td>
+                        <td>
+                            <% if (user.media_url) { %>
+                                <a href="<%= user.media_url %>" target="_blank">View</a>
+                                <% } else { %>
+                                    N/A
+                                    <% } %>
+                        </td>
+                        <td>
+                            <form action="/updateUser" method="post">
+                                <input type="hidden" name="id" value="<%= user.id %>">
+                                <input type="text" id="name" name="name" placeholder="Enter Name" required>
+                                <input type="text" id="city" name="city" placeholder="Enter City" required>
+                                <input type="text" id="mobile" name="mobile" placeholder="Enter Mobile">
+                                <input type="text" id="media_url" name="media_url" placeholder="Enter Media URL">
+                                <button type="submit">Update User</button>
+                            </form>
+                        </td>
+
+                    </tr>
+                    <% }) %>
+            </table>
+
+            <h2>Add User</h2>
+            <form action="/addUser" method="POST">
+                <input type="text" id="name" name="name" placeholder="Enter Name" required>
+                <input type="text" id="city" name="city" placeholder="Enter City" required>
+                <input type="text" id="mobile" name="mobile" placeholder="Enter Mobile">
+                <input type="text" id="media_url" name="media_url" placeholder="Enter Media URL">
+                <button type="submit">Add User</button>
+            </form>
+</body>
+
+</html>
